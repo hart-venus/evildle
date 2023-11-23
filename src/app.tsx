@@ -1,19 +1,41 @@
-import {useEffect} from 'preact/hooks';
+import {useEffect, useState} from 'preact/hooks';
 
 import './app.css';
 import BoardRow from './components/BoardRow/BoardRow';
 import NavBar from './components/NavBar/NavBar';
 
-function handleKeyPress(event: KeyboardEvent) {
-	const {key} = event;
-
-	if ((key >= 'a' && key <= 'z') || key === 'Backspace' || key === 'Enter') {
-		console.log(`Key pressed: ${key}`);
-		// Add your logic here for what should happen when these keys are pressed
-	}
-}
-
 export function App() {
+	const [input, setInput] = useState('');
+
+	function handleKeyPress(event: KeyboardEvent) {
+		let {key} = event;
+
+		if (
+			(key >= 'a' && key <= 'z') ||
+			(key >= 'A' && key <= 'Z' && key.length === 1) ||
+			key === 'Backspace' ||
+			key === 'Enter'
+		) {
+			// Set key to uppercase
+			key = key.toUpperCase();
+			setInput(prevInput => {
+				if (key === 'BACKSPACE') {
+					return prevInput.slice(0, -1);
+				}
+
+				if (key === 'ENTER') {
+					return '';
+				}
+
+				if (prevInput.length >= 5) {
+					return prevInput;
+				}
+
+				return prevInput + key;
+			});
+		}
+	}
+
 	useEffect(() => {
 		window.addEventListener('keydown', handleKeyPress);
 
@@ -24,7 +46,7 @@ export function App() {
 	return (
 		<>
 			<NavBar />
-			<BoardRow input='' isCurrentRow={true}></BoardRow>
+			<BoardRow input={input} isCurrentRow={true}></BoardRow>
 		</>
 	);
 }

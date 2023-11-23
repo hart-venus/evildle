@@ -34,6 +34,7 @@ module.exports = {
 	},
 	rules: {
 		'jsx-quotes': ['error', 'prefer-single'],
+		'operator-linebreak': ['error', 'after'],
 		'react/react-in-jsx-scope': 'off',
 		'prettier/prettier': ['error', {singleQuote: true}],
 		'import/order': [
