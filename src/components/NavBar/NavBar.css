@@ -1,0 +1,24 @@
+nav.NavBar {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid var(--text-color);
+}
+
+h1.header {
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+    font-style: italic;
+    /* stop this text being selected */
+    user-select: none;
+}
+
+img.logo {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    margin-right: 10px;
+}

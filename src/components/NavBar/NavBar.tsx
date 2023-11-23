@@ -1,12 +1,13 @@
 import {type FunctionComponent} from 'react';
+
+import logo from '../../assets/headerLogo.svg';
 import './NavBar.css';
 
 const NavBar: FunctionComponent = () => (
 	<>
 		<nav className='NavBar'>
-			<a href='/'>Home</a>
-			<a href='/about'>About</a>
-			<a href='/contact'>Contact</a>
+			<img src={logo} className='logo' alt='logo' />
+			<h1 className='header'>Evildle</h1>
 		</nav>
 	</>
 );
