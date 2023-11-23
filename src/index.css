@@ -1,11 +1,9 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-color);
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,17 +14,18 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
-body {
-  --text-color: rgb(250, 254, 252);
+:root {
+  --text-color: #fafefc;
+  --background-color: rgb(33, 3, 24);
 }
 
 @media (prefers-color-scheme: light) {
-  body {
-    --color: #0c2b33;
+  :root {
+    --text-color: #0c2b33;
+    --background-color: #fafefc;
   }
 }
