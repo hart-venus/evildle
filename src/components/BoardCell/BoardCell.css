@@ -1,0 +1,30 @@
+.BoardCell {
+    width: 64px;
+    margin: 4px;
+    border-radius: 10px;
+    height: 64px;
+    background-color: red;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.BoardCell.empty {
+    background-color: transparent;
+    width: 58px;
+    height: 58px;
+    border: 3px solid color-mix(in srgb, var(--text-color) 25%, transparent);
+}
+
+.BoardCell.unsubmitted {
+    background-color: transparent;
+    width: 58px;
+    height: 58px;
+    border: 3px solid color-mix(in srgb, var(--text-color) 45%, transparent);
+}
+
+h1.letter {
+    text-align: center;
+    width: 100%;
+    user-select: none;
+}

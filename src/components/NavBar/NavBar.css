@@ -4,7 +4,7 @@ nav.NavBar {
     align-items: center;
     justify-content: center;
     width: 100%;
-    border-bottom: 1px solid var(--text-color);
+    border-bottom: 1px solid color-mix(in srgb, var(--text-color) 45%, transparent);
 }
 
 h1.header {
