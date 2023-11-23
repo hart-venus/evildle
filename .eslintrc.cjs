@@ -34,6 +34,9 @@ module.exports = {
 	},
 	rules: {
 		'jsx-quotes': ['error', 'prefer-single'],
+		'@typescript-eslint/quotes': ['error', 'single', {avoidEscape: true}],
+		'react/prop-types': 'off',
+		'@typescript-eslint/no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
 		'operator-linebreak': ['error', 'after'],
 		'react/react-in-jsx-scope': 'off',
 		'prettier/prettier': ['error', {singleQuote: true}],

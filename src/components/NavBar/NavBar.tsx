@@ -1,4 +1,4 @@
-import {type FunctionComponent} from 'react';
+import {type FunctionComponent} from 'preact';
 
 import logo from '../../assets/headerLogo.svg';
 import './NavBar.css';

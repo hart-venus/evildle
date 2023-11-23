@@ -1,11 +1,10 @@
-import {type FunctionComponent} from 'react';
+import {type FunctionComponent} from 'preact';
 
 import './BoardRow.css';
 import {BoardCellState} from '../BoardCell/BoardCell';
 import BoardCell from '../BoardCell/BoardCell';
 type BoardRowProps = {
 	input: string;
-	isCurrentRow: boolean;
 };
 
 const BoardRow: FunctionComponent<BoardRowProps> = ({input}) => (
