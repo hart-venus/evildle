@@ -20,7 +20,7 @@ body {
 
 :root {
   --text-color: #fafefc;
-  --background-color: rgb(33, 3, 24);
+  --background-color: rgb(31, 21, 23);
 }
 
 @media (prefers-color-scheme: light) {

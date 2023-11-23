@@ -1,11 +1,10 @@
 import './app.css';
+import NavBar from './components/NavBar/NavBar';
 
 export function App() {
-	const text = 'Hello World';
 	return (
 		<>
-			<h1>React App</h1>
-			<p>{text}</p>
+			<NavBar />
 		</>
 	);
 }
