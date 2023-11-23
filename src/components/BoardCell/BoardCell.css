@@ -21,6 +21,17 @@
     width: 58px;
     height: 58px;
     border: 3px solid color-mix(in srgb, var(--text-color) 45%, transparent);
+
+    animation: shrink 0.15s forwards ease-in-out;
+}
+
+@keyframes shrink {
+    from {
+        transform: scale(1.15);
+    }
+    to {
+        transform: scale(1.0);
+    }
 }
 
 h1.letter {
