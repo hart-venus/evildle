@@ -1,6 +1,7 @@
 import {type FunctionComponent} from 'preact';
 import {useState, useEffect} from 'preact/hooks';
 
+import validWords from '../../words.json';
 import BoardRow from '../BoardRow/BoardRow';
 import Message, {type MessageProps} from '../Message/Message';
 import './Board.css';
@@ -28,20 +29,29 @@ const Board: FunctionComponent = () => {
 		);
 	};
 
+	function shakeRow(row: number) {
+		if (!rowProps[row].isShaking) {
+			let newRowProps = [...rowProps];
+			newRowProps[row].isShaking = true;
+			setRowProps(newRowProps);
+			setTimeout(() => {
+				newRowProps = [...rowProps];
+				newRowProps[row].isShaking = false;
+				setRowProps(newRowProps);
+			}, 250);
+		}
+	}
+
 	function handleNextRow() {
 		if (rowProps[currentRow].input.length < 5) {
-			if (!rowProps[currentRow].isShaking) {
-				let newRowProps = [...rowProps];
-				newRowProps[currentRow].isShaking = true;
-				setRowProps(newRowProps);
-				setTimeout(() => {
-					newRowProps = [...rowProps];
-					newRowProps[currentRow].isShaking = false;
-					setRowProps(newRowProps);
-				}, 250);
-			}
-
+			shakeRow(currentRow);
 			addMessage('Not enough letters');
+			return;
+		}
+
+		if (!validWords.includes(rowProps[currentRow].input.toLowerCase())) {
+			shakeRow(currentRow);
+			addMessage('Not in word list');
 			return;
 		}
 
