@@ -1,4 +1,18 @@
 div.Board {
     margin-top: 30px;
     overflow: hidden;
+    overflow-y: hidden;
+}
+
+div.messages {
+    width: 100%;
+    position: absolute;
+    gap: 28px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 20px;
+    height: 100%;
+    overflow-y: hidden;
 }

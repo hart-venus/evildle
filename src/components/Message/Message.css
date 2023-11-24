@@ -1,0 +1,26 @@
+
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+div.message {
+    color: var(--text-color);
+    width: fit-content;
+    background-color: var(--background-color);
+    border: 2px solid color-mix(in srgb, var(--text-color) 45%, transparent);
+    padding: 8px;
+    border-radius: 10px;
+    z-index: 20;
+    opacity: 1;
+    transition: all 1s ease-in-out;
+    animation: fade 1s ease-in-out forwards;
+}

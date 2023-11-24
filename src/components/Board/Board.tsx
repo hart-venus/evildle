@@ -2,6 +2,7 @@ import {type FunctionComponent} from 'preact';
 import {useState, useEffect} from 'preact/hooks';
 
 import BoardRow from '../BoardRow/BoardRow';
+import Message, {type MessageProps} from '../Message/Message';
 import './Board.css';
 const Board: FunctionComponent = () => {
 	const nRows = 6;
@@ -11,6 +12,22 @@ const Board: FunctionComponent = () => {
 			isShaking: false,
 		})),
 	);
+	const [messages, setMessages] = useState<MessageProps[]>([]);
+
+	const addMessage = (message: string) => {
+		const newId = Math.random();
+		setMessages(prevMessages => [
+			...prevMessages,
+			{message, id: newId, removeSelf: removeMessage},
+		]);
+	};
+
+	const removeMessage = (id: number) => {
+		setMessages(prevMessages =>
+			prevMessages.filter(message => message.id !== id),
+		);
+	};
+
 	function handleNextRow() {
 		if (rowProps[currentRow].input.length < 5) {
 			if (!rowProps[currentRow].isShaking) {
@@ -24,6 +41,7 @@ const Board: FunctionComponent = () => {
 				}, 250);
 			}
 
+			addMessage('Not enough letters');
 			return;
 		}
 
@@ -80,6 +98,11 @@ const Board: FunctionComponent = () => {
 	}, [handleKeyPress]);
 	return (
 		<>
+			<div className='messages'>
+				{messages.map(({message, id, removeSelf}) => (
+					<Message key={id} message={message} id={id} removeSelf={removeSelf} />
+				))}
+			</div>
 			<div className='Board'>
 				{rowProps.map(({input, isShaking}, i) => (
 					<BoardRow key={i} input={input} isShaking={isShaking} />
