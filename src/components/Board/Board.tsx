@@ -8,9 +8,25 @@ const Board: FunctionComponent = () => {
 	const [rowProps, setRowProps] = useState(
 		Array.from({length: nRows}, (_, __) => ({
 			input: '',
+			isShaking: false,
 		})),
 	);
 	function handleNextRow() {
+		if (rowProps[currentRow].input.length < 5) {
+			if (!rowProps[currentRow].isShaking) {
+				let newRowProps = [...rowProps];
+				newRowProps[currentRow].isShaking = true;
+				setRowProps(newRowProps);
+				setTimeout(() => {
+					newRowProps = [...rowProps];
+					newRowProps[currentRow].isShaking = false;
+					setRowProps(newRowProps);
+				}, 250);
+			}
+
+			return;
+		}
+
 		setCurrentRow(prevCurrentRow => {
 			if (prevCurrentRow === nRows - 1) {
 				return prevCurrentRow;
@@ -65,8 +81,8 @@ const Board: FunctionComponent = () => {
 	return (
 		<>
 			<div className='Board'>
-				{rowProps.map(({input}, i) => (
-					<BoardRow key={i} input={input} />
+				{rowProps.map(({input, isShaking}, i) => (
+					<BoardRow key={i} input={input} isShaking={isShaking} />
 				))}
 			</div>
 		</>
