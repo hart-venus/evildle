@@ -15,8 +15,8 @@ const Board: FunctionComponent = () => {
 	);
 	const [messages, setMessages] = useState<MessageProps[]>([]);
 	const [allowInput, setAllowInput] = useState(true);
-	const [lettersState, setLettersState] = useState<number[]>(
-		Array.from({length: 25}, (_, __) => -1),
+	const [lettersState, setLettersState] = useState<number[][]>(
+		Array.from({length: 26}, (_, __) => [-1]),
 	); // Letters have not been set yet
 
 	const [possibleSolutions, setPossibleSolutions] =
@@ -37,18 +37,48 @@ const Board: FunctionComponent = () => {
 		let solutions = [...possibleSolutions];
 		// Get current letters state
 		const state = [...lettersState];
+		console.log('state', state);
 		// Iterate over each letter in input
 		for (let i = 0; i < input.length; i++) {
 			// Letter index of input[i] in alphabet
 			const letterIndex = input.charCodeAt(i) - 97;
 			console.log('Letter index: ' + letterIndex);
 			// If letter is not in the board, remove all words containing that letter
-			if (state[letterIndex] === -1) {
-				const solutionsFiltered = solutions.filter(
+			if (state[letterIndex][0] === -1) {
+				let solutionsFiltered = solutions.filter(
 					word => !word.includes(input[i]),
 				);
 				if (solutionsFiltered.length === 0) {
-					continue; // Go to next letter
+					// We cannot remove the letter from the solution
+					// can we remove it from the i index?
+					solutionsFiltered = solutions.filter(
+						word => !(word[i] === input[i]), // Remove all words where the i index is the letter
+					);
+					if (solutionsFiltered.length === 0) {
+						// We cannot remove the letter from the i index
+						continue;
+					}
+				}
+
+				if (solutionsFiltered.length === 1) {
+					const solution = solutionsFiltered[0];
+					// We have reached only one solution
+					setPossibleSolutions(solutionsFiltered);
+					solutions = solutionsFiltered;
+					// Get all appearances of the letter in the word
+					const appearances = solution
+						.split('') // Split into array
+						.map((letter, index) => (letter === input[i] ? index + 1 : -1))
+						.filter(index => index !== -1);
+					if (appearances.length === 0) {
+						// Letter does not appear in word
+						appearances.push(0);
+					}
+
+					state[letterIndex] = appearances;
+					console.log('solution index in word', state[letterIndex]);
+					setLettersState(state);
+					continue;
 				}
 
 				console.log(
@@ -59,7 +89,7 @@ const Board: FunctionComponent = () => {
 				);
 				setPossibleSolutions(solutionsFiltered);
 				solutions = solutionsFiltered;
-				state[letterIndex] = 0; // 0 = does not appear in word
+				state[letterIndex][0] = 0; // 0 = does not appear in word
 				setLettersState(state);
 			}
 
