@@ -14,6 +14,13 @@ const Board: FunctionComponent = () => {
 		})),
 	);
 	const [messages, setMessages] = useState<MessageProps[]>([]);
+	const [allowInput, setAllowInput] = useState(true);
+	const [lettersState, setLettersState] = useState<number[]>(
+		Array.from({length: 25}, (_, __) => -1),
+	); // Letters have not been set yet
+
+	const [possibleSolutions, setPossibleSolutions] =
+		useState<string[]>(validWords);
 
 	const addMessage = (message: string) => {
 		const newId = Math.random();
@@ -22,6 +29,43 @@ const Board: FunctionComponent = () => {
 			{message, id: newId, removeSelf: removeMessage},
 		]);
 	};
+
+	function tryToBeat(input: string) {
+		// Set input to lowercase
+		input = input.toLowerCase();
+		// Get current list of possible solutions
+		let solutions = [...possibleSolutions];
+		// Get current letters state
+		const state = [...lettersState];
+		// Iterate over each letter in input
+		for (let i = 0; i < input.length; i++) {
+			// Letter index of input[i] in alphabet
+			const letterIndex = input.charCodeAt(i) - 97;
+			console.log('Letter index: ' + letterIndex);
+			// If letter is not in the board, remove all words containing that letter
+			if (state[letterIndex] === -1) {
+				const solutionsFiltered = solutions.filter(
+					word => !word.includes(input[i]),
+				);
+				if (solutionsFiltered.length === 0) {
+					continue; // Go to next letter
+				}
+
+				console.log(
+					'Removing words containing ' +
+						input[i] +
+						': ' +
+						solutionsFiltered.length,
+				);
+				setPossibleSolutions(solutionsFiltered);
+				solutions = solutionsFiltered;
+				state[letterIndex] = 0; // 0 = does not appear in word
+				setLettersState(state);
+			}
+
+			console.log(solutions);
+		}
+	}
 
 	const removeMessage = (id: number) => {
 		setMessages(prevMessages =>
@@ -62,6 +106,9 @@ const Board: FunctionComponent = () => {
 
 			return prevCurrentRow + 1;
 		});
+
+		// SetAllowInput(false);
+		tryToBeat(rowProps[currentRow].input);
 	}
 
 	const [currentRow, setCurrentRow] = useState(0);
@@ -69,10 +116,11 @@ const Board: FunctionComponent = () => {
 		let {key} = event;
 
 		if (
-			(key >= 'a' && key <= 'z') ||
-			(key >= 'A' && key <= 'Z' && key.length === 1) ||
-			key === 'Backspace' ||
-			key === 'Enter'
+			allowInput &&
+			((key >= 'a' && key <= 'z') ||
+				(key >= 'A' && key <= 'Z' && key.length === 1) ||
+				key === 'Backspace' ||
+				key === 'Enter')
 		) {
 			// Set key to uppercase
 			key = key.toUpperCase();
@@ -105,7 +153,7 @@ const Board: FunctionComponent = () => {
 		return () => {
 			window.removeEventListener('keydown', handleKeyPress);
 		};
-	}, [handleKeyPress]);
+	}, [allowInput, currentRow, lettersState, possibleSolutions, rowProps]);
 	return (
 		<>
 			<div className='messages'>
