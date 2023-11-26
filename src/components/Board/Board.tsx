@@ -127,7 +127,12 @@ const Board: FunctionComponent = () => {
 			return prevCurrentRow + 1;
 		});
 
-		// SetAllowInput(false);
+		setAllowInput(false);
+		// Set timeout to allow input
+		setTimeout(() => {
+			setAllowInput(true);
+		}, 1400);
+
 		tryToBeat(rowProps[currentRow].input);
 		setRowProps(prevRowProps => {
 			const newRowProps = [...prevRowProps];

@@ -1,5 +1,4 @@
 import {type FunctionComponent} from 'preact';
-
 import './BoardRow.css';
 import {useEffect} from 'preact/hooks';
 
