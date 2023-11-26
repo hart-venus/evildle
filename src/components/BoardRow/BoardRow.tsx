@@ -1,6 +1,6 @@
 import {type FunctionComponent} from 'preact';
 import './BoardRow.css';
-import {useEffect} from 'preact/hooks';
+import {useEffect, useState} from 'preact/hooks';
 
 import {BoardCellState} from '../BoardCell/BoardCell';
 import BoardCell from '../BoardCell/BoardCell';
@@ -17,9 +17,20 @@ const BoardRow: FunctionComponent<BoardRowProps> = ({
 	gameState,
 	isShaking,
 }) => {
+	const [revealedIndex, setRevealedIndex] = useState<number>(-1);
 	useEffect(() => {
+		const increaseRevealIndex = (times: number) => {
+			if (times < 5) {
+				setTimeout(() => {
+					setRevealedIndex(times);
+					increaseRevealIndex(times + 1);
+				}, 280);
+			}
+		};
+
 		if (revealResults) {
 			console.log('Game State from BoardRow:', gameState);
+			increaseRevealIndex(0);
 		}
 	}, [revealResults]);
 	return (
@@ -36,6 +47,7 @@ const BoardRow: FunctionComponent<BoardRowProps> = ({
 						<BoardCell key={i} letter='' state={BoardCellState.empty} />
 					),
 				)}
+				<div>{revealedIndex}</div>
 			</div>
 		</>
 	);
