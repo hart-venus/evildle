@@ -16,7 +16,7 @@ const Board: FunctionComponent = () => {
 	const [messages, setMessages] = useState<MessageProps[]>([]);
 	const [allowInput, setAllowInput] = useState(true);
 	const [lettersState, setLettersState] = useState<number[][]>(
-		Array.from({length: 26}, (_, __) => [-1]),
+		Array.from({length: 26}, (_, __) => [0, 1, 2, 3, 4]),
 	); // Letters have not been set yet
 
 	const [possibleSolutions, setPossibleSolutions] =
@@ -43,8 +43,8 @@ const Board: FunctionComponent = () => {
 			// Letter index of input[i] in alphabet
 			const letterIndex = input.charCodeAt(i) - 97;
 			console.log('Letter index: ' + letterIndex);
-			// If letter is not in the board, remove all words containing that letter
-			if (state[letterIndex][0] === -1) {
+			// If letter is not in the state yet, remove all words containing that letter
+			if (state[letterIndex].length === 5) {
 				let solutionsFiltered = solutions.filter(
 					word => !word.includes(input[i]),
 				);
@@ -57,6 +57,15 @@ const Board: FunctionComponent = () => {
 					if (solutionsFiltered.length === 0) {
 						// We cannot remove the letter from the i index
 						continue;
+					} else {
+						const newLetterState = [...lettersState][letterIndex];
+						// Remove first occurrence of i from newLetterState
+						const index = newLetterState.indexOf(i);
+						newLetterState.splice(index, 1);
+						state[letterIndex] = newLetterState;
+						setPossibleSolutions(solutionsFiltered);
+						solutions = solutionsFiltered;
+						setLettersState(state);
 					}
 				}
 
@@ -89,7 +98,7 @@ const Board: FunctionComponent = () => {
 				);
 				setPossibleSolutions(solutionsFiltered);
 				solutions = solutionsFiltered;
-				state[letterIndex][0] = 0; // 0 = does not appear in word
+				state[letterIndex] = []; // 0 = does not appear in word
 				setLettersState(state);
 			}
 
