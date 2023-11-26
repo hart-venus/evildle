@@ -37,69 +37,53 @@ const Board: FunctionComponent = () => {
 		let solutions = [...possibleSolutions];
 		// Get current letters state
 		const state = [...lettersState];
-		console.log('state', state);
 		// Iterate over each letter in input
 		for (let i = 0; i < input.length; i++) {
 			// Letter index of input[i] in alphabet
 			const letterIndex = input.charCodeAt(i) - 97;
 			console.log('Letter index: ' + letterIndex);
 			// If letter is not in the state yet, remove all words containing that letter
-			if (state[letterIndex].length === 5) {
-				let solutionsFiltered = solutions.filter(
-					word => !word.includes(input[i]),
+
+			let solutionsFiltered = solutions.filter(
+				word => !word.includes(input[i]),
+			);
+			if (solutionsFiltered.length === 0) {
+				// We cannot remove the letter from the solution
+				// can we remove it from the i index?
+				solutionsFiltered = solutions.filter(
+					word => !(word[i] === input[i]), // Remove all words where the i index is the letter
 				);
 				if (solutionsFiltered.length === 0) {
-					// We cannot remove the letter from the solution
-					// can we remove it from the i index?
-					solutionsFiltered = solutions.filter(
-						word => !(word[i] === input[i]), // Remove all words where the i index is the letter
-					);
-					if (solutionsFiltered.length === 0) {
-						// We cannot remove the letter from the i index
-						continue;
-					} else {
-						const newLetterState = [...lettersState][letterIndex];
-						// Remove first occurrence of i from newLetterState
-						const index = newLetterState.indexOf(i);
-						newLetterState.splice(index, 1);
-						state[letterIndex] = newLetterState;
-						setPossibleSolutions(solutionsFiltered);
-						solutions = solutionsFiltered;
-						setLettersState(state);
-					}
-				}
-
-				if (solutionsFiltered.length === 1) {
-					const solution = solutionsFiltered[0];
-					// We have reached only one solution
+					// We cannot remove the letter from the i index
+					continue;
+				} else {
+					const newLetterState = [...lettersState][letterIndex];
+					// Remove first occurrence of i from newLetterState
+					const index = newLetterState.indexOf(i);
+					newLetterState.splice(index, 1);
+					state[letterIndex] = newLetterState;
 					setPossibleSolutions(solutionsFiltered);
 					solutions = solutionsFiltered;
-					// Get all appearances of the letter in the word
-					const appearances = solution
-						.split('') // Split into array
-						.map((letter, index) => (letter === input[i] ? index : -1))
-						.filter(index => index !== -1);
-
-					state[letterIndex] = appearances;
-					console.log('solution index in word', state[letterIndex]);
 					setLettersState(state);
 					continue;
 				}
-
-				console.log(
-					'Removing words containing ' +
-						input[i] +
-						': ' +
-						solutionsFiltered.length,
-				);
-				setPossibleSolutions(solutionsFiltered);
-				solutions = solutionsFiltered;
-				state[letterIndex] = []; // 0 = does not appear in word
-				setLettersState(state);
 			}
+
+			console.log(
+				'Removing words containing ' +
+					input[i] +
+					': ' +
+					solutionsFiltered.length,
+			);
+			setPossibleSolutions(solutionsFiltered);
+			solutions = solutionsFiltered;
+			state[letterIndex] = []; // 0 = does not appear in word
+			setLettersState(state);
 
 			console.log(solutions);
 		}
+
+		console.log(state);
 	}
 
 	const removeMessage = (id: number) => {
