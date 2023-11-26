@@ -11,6 +11,7 @@ const Board: FunctionComponent = () => {
 		Array.from({length: nRows}, (_, __) => ({
 			input: '',
 			isShaking: false,
+			revealResults: false,
 		})),
 	);
 	const [messages, setMessages] = useState<MessageProps[]>([]);
@@ -128,6 +129,11 @@ const Board: FunctionComponent = () => {
 
 		// SetAllowInput(false);
 		tryToBeat(rowProps[currentRow].input);
+		setRowProps(prevRowProps => {
+			const newRowProps = [...prevRowProps];
+			newRowProps[currentRow].revealResults = true;
+			return newRowProps;
+		});
 	}
 
 	const [currentRow, setCurrentRow] = useState(0);
@@ -181,8 +187,14 @@ const Board: FunctionComponent = () => {
 				))}
 			</div>
 			<div className='Board'>
-				{rowProps.map(({input, isShaking}, i) => (
-					<BoardRow key={i} input={input} isShaking={isShaking} />
+				{rowProps.map(({input, isShaking, revealResults}, i) => (
+					<BoardRow
+						revealResults={revealResults}
+						gameState={lettersState}
+						key={i}
+						input={input}
+						isShaking={isShaking}
+					/>
 				))}
 			</div>
 		</>
