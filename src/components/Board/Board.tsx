@@ -77,12 +77,8 @@ const Board: FunctionComponent = () => {
 					// Get all appearances of the letter in the word
 					const appearances = solution
 						.split('') // Split into array
-						.map((letter, index) => (letter === input[i] ? index + 1 : -1))
+						.map((letter, index) => (letter === input[i] ? index : -1))
 						.filter(index => index !== -1);
-					if (appearances.length === 0) {
-						// Letter does not appear in word
-						appearances.push(0);
-					}
 
 					state[letterIndex] = appearances;
 					console.log('solution index in word', state[letterIndex]);
