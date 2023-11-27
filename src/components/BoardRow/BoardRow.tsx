@@ -37,17 +37,20 @@ const BoardRow: FunctionComponent<BoardRowProps> = ({
 		<>
 			<div className={isShaking ? 'BoardRow shake' : 'BoardRow'}>
 				{Array.from({length: 5}, (_, i) =>
-					i <= input.length - 1 ? (
-						<BoardCell
-							key={i}
-							letter={input[i]}
-							state={BoardCellState.unsubmitted}
-						/>
+					revealedIndex < i ? (
+						i <= input.length - 1 ? (
+							<BoardCell
+								key={i}
+								letter={input[i]}
+								state={BoardCellState.unsubmitted}
+							/>
+						) : (
+							<BoardCell key={i} letter='' state={BoardCellState.empty} />
+						)
 					) : (
-						<BoardCell key={i} letter='' state={BoardCellState.empty} />
+						<BoardCell key={i} letter={input[i]} state={BoardCellState.empty} />
 					),
 				)}
-				<div>{revealedIndex}</div>
 			</div>
 		</>
 	);
