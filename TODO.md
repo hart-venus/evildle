@@ -1,0 +1,6 @@
+- [ ] Hints for the user
+- [ ] Streak function
+- [ ] Stats for guesses
+- [ ] How-to-play section
+- [ ] Keyboard with letter state
+- [ ] Winning and losing messages
