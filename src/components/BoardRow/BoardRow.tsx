@@ -17,6 +17,27 @@ const BoardRow: FunctionComponent<BoardRowProps> = ({
 	gameState,
 	isShaking,
 }) => {
+	function classFromState(
+		gameState: number[][],
+		letter: string,
+		index: number,
+	): BoardCellState {
+		// Get index of letter in the alphabet (letter is uppercase)
+		const letterIndex = letter.charCodeAt(0) - 65;
+		// If gameState[letterIndex] is empty, letter is not in word
+		if (gameState[letterIndex].length === 0) {
+			return BoardCellState.notInWord;
+		}
+
+		// If gameState[letterIndex] does not contain index, letter is in word but
+		// not in the correct position
+		if (!gameState[letterIndex].includes(index)) {
+			return BoardCellState.inWord;
+		}
+
+		return BoardCellState.correct;
+	}
+
 	const [revealedIndex, setRevealedIndex] = useState<number>(-1);
 	useEffect(() => {
 		const increaseRevealIndex = (times: number) => {
@@ -48,7 +69,11 @@ const BoardRow: FunctionComponent<BoardRowProps> = ({
 							<BoardCell key={i} letter='' state={BoardCellState.empty} />
 						)
 					) : (
-						<BoardCell key={i} letter={input[i]} state={BoardCellState.empty} />
+						<BoardCell
+							key={i}
+							letter={input[i]}
+							state={classFromState(gameState, input[i], i)}
+						/>
 					),
 				)}
 			</div>

@@ -20,8 +20,9 @@ const Board: FunctionComponent = () => {
 		Array.from({length: 26}, (_, __) => [0, 1, 2, 3, 4]),
 	); // Letters have not been set yet
 
-	const [possibleSolutions, setPossibleSolutions] =
-		useState<string[]>(validWords);
+	const [possibleSolutions, setPossibleSolutions] = useState<string[]>([
+		'shore',
+	]);
 
 	const addMessage = (message: string) => {
 		const newId = Math.random();
