@@ -1,9 +1,9 @@
 .BoardCell {
-    width: 64px;
+    width: 58px;
+    height: 58px;
     margin: 4px;
+    border: 3px solid color-mix(in srgb, var(--text-color) 25%, transparent);
     border-radius: 10px;
-    height: 64px;
-    background-color: red;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -11,18 +11,31 @@
 
 .BoardCell.empty {
     background-color: transparent;
-    width: 58px;
-    height: 58px;
-    border: 3px solid color-mix(in srgb, var(--text-color) 25%, transparent);
 }
 
 .BoardCell.unsubmitted {
     background-color: transparent;
-    width: 58px;
-    height: 58px;
-    border: 3px solid color-mix(in srgb, var(--text-color) 45%, transparent);
+    border-color: color-mix(in srgb, var(--text-color) 45%, transparent);
 
     animation: shrink 0.15s forwards ease-in-out;
+}
+
+.BoardCell.notInWord {
+    background-color: var(--not-in-word);
+    border-color: var(--not-in-word);
+    animation: show 0.28s forwards;
+}
+
+.BoardCell.inWord {
+    background-color: var(--in-word);
+    border-color: var(--in-word);
+    animation: show 0.28s forwards;
+}
+
+.BoardCell.correct {
+    background-color: var(--correct);
+    border-color: var(--correct);
+    animation: show 0.28s forwards;
 }
 
 @keyframes shrink {
@@ -31,6 +44,25 @@
     }
     to {
         transform: scale(1.0);
+    }
+}
+
+@keyframes show {
+    0% {
+        background-color: transparent;
+        border-color: color-mix(in srgb, var(--text-color) 45%, transparent);
+        transform: rotate3d(0, 1, 0, 0deg);
+    }
+    49% {
+        background-color: transparent;
+        border-color: color-mix(in srgb, var(--text-color) 45%, transparent);
+        transform: rotate3d(1, 0, 0, 90deg);
+    }
+    51% {
+        transform: rotate3d(1, 0, 0, 90deg);
+    }
+    100% {
+        transform: rotate3d(1, 0, 0, 0deg);
     }
 }
 

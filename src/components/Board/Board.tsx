@@ -59,10 +59,12 @@ const Board: FunctionComponent = () => {
 					// We cannot remove the letter from the i index
 					continue;
 				} else {
-					const newLetterState = [...lettersState][letterIndex];
+					let newLetterState = [...lettersState][letterIndex];
 					// Remove first occurrence of i from newLetterState
-					const index = newLetterState.indexOf(i);
-					newLetterState.splice(index, 1);
+					console.log(
+						'Removing ' + i + ' from letterstate after ' + input + input[i],
+					);
+					newLetterState = newLetterState.filter(index => index !== i);
 					state[letterIndex] = newLetterState;
 					setPossibleSolutions(solutionsFiltered);
 					solutions = solutionsFiltered;
