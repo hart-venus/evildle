@@ -20,18 +20,21 @@ body {
 
 :root {
   --text-color: #fafefc;
-  --background-color: rgb(31, 21, 23);
+  --background-color: #1f1517;
   --font-family: 'Inter Tight', sans-serif;
   
   /* letter cell variables */
-  --not-in-word: #97a7ab;
-  --in-word: rgb(205, 188, 105);
-  --correct: rgb(57, 137, 57);
+  --not-in-word: #ff5154;
+  --in-word: #e08e45;
+  --correct: #73a580;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --text-color: #0c2b33;
     --background-color: #fafefc;
+    --correct: #6B9080;
+    --not-in-word: #A53860;
+    --in-word: #E59F71;
   }
 }
