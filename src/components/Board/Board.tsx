@@ -66,7 +66,7 @@ const Board: FunctionComponent = () => {
 					// We cannot remove the letter from the i index
 					continue;
 				} else {
-					let newLetterState = [...lettersState][letterIndex];
+					let newLetterState = [...state][letterIndex];
 					// Remove first occurrence of i from newLetterState
 					console.log(
 						'Removing ' + i + ' from letterstate after ' + input + input[i],
@@ -145,11 +145,11 @@ const Board: FunctionComponent = () => {
 		) {
 			setTimeout(() => {
 				addMessage(winningMessages[currentRow]);
-			}, 1400);
+			}, 1680);
 		} else {
 			setTimeout(() => {
 				setAllowInput(true);
-			}, 1400);
+			}, 1680);
 		}
 
 		tryToBeat(rowProps[currentRow].input);
