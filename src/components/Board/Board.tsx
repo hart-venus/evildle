@@ -23,7 +23,14 @@ const Board: FunctionComponent = () => {
 	const [possibleSolutions, setPossibleSolutions] = useState<string[]>([
 		'shore',
 	]);
-
+	const winningMessages = [
+		'Genius',
+		'Magnificent',
+		'Impressive',
+		'Splendid',
+		'Great',
+		'Phew',
+	];
 	const addMessage = (message: string) => {
 		const newId = Math.random();
 		setMessages(prevMessages => [
@@ -131,10 +138,19 @@ const Board: FunctionComponent = () => {
 		});
 
 		setAllowInput(false);
-		// Set timeout to allow input
-		setTimeout(() => {
-			setAllowInput(true);
-		}, 1400);
+		// Check for win
+		if (
+			possibleSolutions.length === 1 &&
+			possibleSolutions[0] === rowProps[currentRow].input.toLowerCase()
+		) {
+			setTimeout(() => {
+				addMessage(winningMessages[currentRow]);
+			}, 1400);
+		} else {
+			setTimeout(() => {
+				setAllowInput(true);
+			}, 1400);
+		}
 
 		tryToBeat(rowProps[currentRow].input);
 		setRowProps(prevRowProps => {

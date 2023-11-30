@@ -4,3 +4,6 @@
 - [ ] How-to-play section
 - [ ] Keyboard with letter state
 - [ ] Winning and losing messages
+    - [X] Winning message
+    - [ ] Winning animation
+    - [ ] Losing message (reveal random word)
