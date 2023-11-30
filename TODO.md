@@ -1,5 +1,5 @@
 - [ ] Hints for the user
-- [ ] Fix word processing bug (jests-shore)
+- [X] Fix word processing bug (jests-shore)
 - [ ] Streak function
 - [ ] Stats for guesses
 - [ ] How-to-play section
