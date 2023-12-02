@@ -1,3 +1,4 @@
+import {Lightbulb} from 'lucide-preact';
 import {type FunctionComponent} from 'preact';
 import {useState, useEffect} from 'preact/hooks';
 
@@ -5,6 +6,8 @@ import validWords from '../../words.json';
 import BoardRow from '../BoardRow/BoardRow';
 import Message, {type MessageProps} from '../Message/Message';
 import './Board.css';
+import ToolBar, {type ToolBarProps} from '../ToolBar/ToolBar';
+
 const Board: FunctionComponent = () => {
 	const nRows = 6;
 	const [rowProps, setRowProps] = useState(
@@ -23,6 +26,18 @@ const Board: FunctionComponent = () => {
 	const [possibleSolutions, setPossibleSolutions] = useState<string[]>([
 		'shore',
 	]);
+
+	const tbprops: ToolBarProps = {
+		tools: [
+			{
+				icon: Lightbulb,
+				onClick() {
+					addMessage('You clicked the lightbulb');
+				},
+			},
+		],
+	};
+
 	const winningMessages = [
 		'Genius',
 		'Magnificent',
@@ -225,6 +240,7 @@ const Board: FunctionComponent = () => {
 					/>
 				))}
 			</div>
+			<ToolBar tools={tbprops.tools} />
 		</>
 	);
 };

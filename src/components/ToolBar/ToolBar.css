@@ -1,0 +1,13 @@
+.toolbar {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+
+.toolbar-item {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

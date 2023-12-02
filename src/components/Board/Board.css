@@ -1,7 +1,7 @@
 div.Board {
-    margin-top: 30px;
     overflow: hidden;
     overflow-y: hidden;
+    margin-top: 30px;
 }
 
 div.messages {
