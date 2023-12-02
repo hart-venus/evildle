@@ -7,4 +7,4 @@
 - [ ] Winning and losing messages
     - [X] Winning message
     - [ ] Winning animation
-    - [ ] Losing message (reveal random word)
+    - [X] Losing message (reveal random word)

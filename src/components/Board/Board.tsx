@@ -137,6 +137,7 @@ const Board: FunctionComponent = () => {
 			return prevCurrentRow + 1;
 		});
 
+		tryToBeat(rowProps[currentRow].input);
 		setAllowInput(false);
 		// Check for win
 		if (
@@ -146,13 +147,16 @@ const Board: FunctionComponent = () => {
 			setTimeout(() => {
 				addMessage(winningMessages[currentRow]);
 			}, 1680);
+		} else if (currentRow === nRows - 1) {
+			setTimeout(() => {
+				addMessage(possibleSolutions[0].toUpperCase());
+			}, 1680);
 		} else {
 			setTimeout(() => {
 				setAllowInput(true);
 			}, 1680);
 		}
 
-		tryToBeat(rowProps[currentRow].input);
 		setRowProps(prevRowProps => {
 			const newRowProps = [...prevRowProps];
 			newRowProps[currentRow].revealResults = true;
