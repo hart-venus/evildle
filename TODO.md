@@ -2,6 +2,7 @@
 - [X] Fix word processing bug (jests-shore)
 - [ ] Streak function
 - [ ] Stats for guesses
+- [ ] Modes (regular, deterministic, easy)
 - [ ] How-to-play section
 - [ ] Keyboard with letter state
 - [ ] Winning and losing messages
