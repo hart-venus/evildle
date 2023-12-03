@@ -3,13 +3,14 @@
     justify-content: left;
     gap: 10px;
     margin: 10px;
-    width: 23.3%;
+    width: 23.2%;
     align-self: center;
 }
 .toolbar-item {
-    padding: 8px;
+    padding: 6px;
     border-radius: 100%;
     border: 3px solid color-mix(in srgb, var(--text-color) 45%, transparent);
+    color: var(--text-color);
     width: 24px;
     height: 24px;
     display: flex;
