@@ -15,7 +15,7 @@ const ToolBar: FunctionComponent<ToolBarProps> = ({tools}) => (
 	<>
 		<div className='toolbar'>
 			{tools.map(({icon: Icon, onClick}, index) => (
-				<Icon className='toolbar-iem' onClick={onClick} key={index} />
+				<Icon className='toolbar-item' onClick={onClick} key={index} />
 			))}
 		</div>
 	</>

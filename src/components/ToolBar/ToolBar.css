@@ -1,12 +1,17 @@
 .toolbar {
     display: flex;
-    justify-content: center;
+    justify-content: left;
+    gap: 10px;
     margin: 10px;
+    width: 23.3%;
+    align-self: center;
 }
-
-
 .toolbar-item {
-    width: 30px;
+    padding: 8px;
+    border-radius: 100%;
+    border: 3px solid color-mix(in srgb, var(--text-color) 45%, transparent);
+    width: 24px;
+    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;

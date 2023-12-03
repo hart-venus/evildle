@@ -6,9 +6,9 @@ div.Board {
 
 div.messages {
     width: 100%;
-    height: calc(100vh - 90px);
+    max-height: calc(100vh - 90px);
     position: absolute;
-    padding-top: 20px;
+    top: 90px;
     gap: 28px;
     display: flex;
     flex-direction: column-reverse;

@@ -32,7 +32,7 @@ const Board: FunctionComponent = () => {
 			{
 				icon: Lightbulb,
 				onClick() {
-					addMessage('You clicked the lightbulb');
+					console.log('Clicked!');
 				},
 			},
 		],
