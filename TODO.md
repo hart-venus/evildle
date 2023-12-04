@@ -4,7 +4,7 @@
 - [ ] Stats for guesses
 - [ ] Modes (regular, deterministic, easy)
 - [ ] How-to-play section
-- [ ] Keyboard with letter state
+- [X] Keyboard with letter state
 - [ ] Winning and losing messages
     - [X] Winning message
     - [ ] Winning animation
