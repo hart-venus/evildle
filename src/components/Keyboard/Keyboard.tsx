@@ -1,3 +1,4 @@
+import {Delete} from 'lucide-preact';
 import {type FunctionComponent} from 'preact';
 
 import './Keyboard.css';
@@ -34,10 +35,18 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({letterValues}) => {
 		}
 	}
 
-	return (
-		<div className='keyboard'>
-			{rows.map((row, index) => (
+	function getJsxForRow(row: string, index: number) {
+		if (index === 2) {
+			return (
 				<div className='row' key={index}>
+					<div
+						className='other-key enter'
+						onClick={() => {
+							keyPress('Enter');
+						}}
+					>
+						ENTER
+					</div>
 					{row.split('').map(letter => (
 						<div
 							className={getKeyClass(letter)}
@@ -49,8 +58,38 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({letterValues}) => {
 							{letter}
 						</div>
 					))}
+					<div
+						className='other-key delete'
+						onClick={() => {
+							keyPress('Backspace');
+						}}
+					>
+						<Delete />
+					</div>
 				</div>
-			))}
+			);
+		}
+
+		return (
+			<div className='row' key={index}>
+				{row.split('').map(letter => (
+					<div
+						className={getKeyClass(letter)}
+						key={letter}
+						onClick={() => {
+							keyPress(letter);
+						}}
+					>
+						{letter}
+					</div>
+				))}
+			</div>
+		);
+	}
+
+	return (
+		<div className='keyboard'>
+			{rows.map((row, index) => getJsxForRow(row, index))}
 		</div>
 	);
 };

@@ -26,6 +26,19 @@
     transition: all 0.1s ease-in-out;
 }
 
+.other-key {
+    user-select: none;
+    cursor: pointer;
+    background-color: color-mix(in srgb, grey 50%, transparent);
+    height: 52px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    border-radius: 6px;
+    justify-content: center;
+}
+
 .key.inWord {
     background-color: var(--in-word);
 }
