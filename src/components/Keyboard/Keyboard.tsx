@@ -1,11 +1,13 @@
 import {type FunctionComponent} from 'preact';
+
 import './Keyboard.css';
+import {KeyStates} from '../Board/Board';
 
 type KeyboardProps = {
-	letterValues: number[][];
+	letterValues: KeyStates[];
 };
 
-const Keyboard: FunctionComponent<KeyboardProps> = () => {
+const Keyboard: FunctionComponent<KeyboardProps> = ({letterValues}) => {
 	const rows = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
 	const keyPress = (key: string) => {
 		const event = new KeyboardEvent('keydown', {
@@ -15,7 +17,21 @@ const Keyboard: FunctionComponent<KeyboardProps> = () => {
 	};
 
 	function getKeyClass(key: string) {
-		return 'key';
+		// Get index of key (key is always uppercase)
+		const index = key.charCodeAt(0) - 65;
+
+		switch (letterValues[index]) {
+			case KeyStates.none:
+				return 'key';
+			case KeyStates.inword:
+				return 'key inWord';
+			case KeyStates.correct:
+				return 'key correct';
+			case KeyStates.notinword:
+				return 'key notInWord';
+			default:
+				return 'key';
+		}
 	}
 
 	return (

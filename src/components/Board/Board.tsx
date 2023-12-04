@@ -25,6 +25,10 @@ const Board: FunctionComponent = () => {
 			revealResults: false,
 		})),
 	);
+	const [keyStates, setKeyStates] = useState(
+		Array.from({length: 26}, (_, __) => KeyStates.none),
+	);
+
 	const [messages, setMessages] = useState<MessageProps[]>([]);
 	const [allowInput, setAllowInput] = useState(true);
 	const [lettersState, setLettersState] = useState<number[][]>(
@@ -89,11 +93,13 @@ const Board: FunctionComponent = () => {
 		let solutions = [...possibleSolutions];
 		// Get current letters state
 		const state = [...lettersState];
+		// Get current keys state
+		const keys = [...keyStates];
 		// Iterate over each letter in input
 		for (let i = 0; i < input.length; i++) {
 			// Letter index of input[i] in alphabet
 			const letterIndex = input.charCodeAt(i) - 97;
-			console.log('Letter index: ' + letterIndex);
+
 			// If letter is not in the state yet, remove all words containing that letter
 
 			let solutionsFiltered = solutions.filter(
@@ -107,18 +113,22 @@ const Board: FunctionComponent = () => {
 				);
 				if (solutionsFiltered.length === 0) {
 					// We cannot remove the letter from the i index
+					keys[letterIndex] = KeyStates.correct;
 					continue;
 				} else {
 					let newLetterState = [...state][letterIndex];
 					// Remove first occurrence of i from newLetterState
-					console.log(
-						'Removing ' + i + ' from letterstate after ' + input + input[i],
-					);
 					newLetterState = newLetterState.filter(index => index !== i);
 					state[letterIndex] = newLetterState;
 					setPossibleSolutions(solutionsFiltered);
 					solutions = solutionsFiltered;
 					setLettersState(state);
+
+					if (keys[letterIndex] !== KeyStates.correct) {
+						// If we haven't already set the key to correct
+						keys[letterIndex] = KeyStates.inword;
+					}
+
 					continue;
 				}
 			}
@@ -132,11 +142,15 @@ const Board: FunctionComponent = () => {
 			setPossibleSolutions(solutionsFiltered);
 			solutions = solutionsFiltered;
 			state[letterIndex] = []; // 0 = does not appear in word
+			keys[letterIndex] = KeyStates.notinword;
 			setLettersState(state);
 
 			console.log(solutions);
 		}
 
+		setTimeout(() => {
+			setKeyStates(keys);
+		}, 1680);
 		console.log(state);
 	}
 
@@ -269,7 +283,7 @@ const Board: FunctionComponent = () => {
 				))}
 			</div>
 			<ToolBar tools={tbprops.tools} />
-			<Keyboard letterValues={lettersState} />
+			<Keyboard letterValues={keyStates} />
 		</>
 	);
 };

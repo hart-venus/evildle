@@ -18,9 +18,22 @@
     user-select: none;
     cursor: pointer;
     font-weight: 600;
-    background-color: grey;
+    background-color: color-mix(in srgb, grey 50%, transparent);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 6px;
+    transition: all 0.1s ease-in-out;
+}
+
+.key.inWord {
+    background-color: var(--in-word);
+}
+
+.key.notInWord {
+    background-color: var(--not-in-word);
+}
+
+.key.correct {
+    background-color: var(--correct);
 }
