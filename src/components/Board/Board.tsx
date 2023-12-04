@@ -7,6 +7,7 @@ import BoardRow from '../BoardRow/BoardRow';
 import Message, {type MessageProps} from '../Message/Message';
 import './Board.css';
 import ToolBar, {type ToolBarProps} from '../ToolBar/ToolBar';
+import Keyboard from '../Keyboard/Keyboard';
 
 const Board: FunctionComponent = () => {
 	const nRows = 6;
@@ -261,6 +262,7 @@ const Board: FunctionComponent = () => {
 				))}
 			</div>
 			<ToolBar tools={tbprops.tools} />
+			<Keyboard letterValues={lettersState} />
 		</>
 	);
 };
