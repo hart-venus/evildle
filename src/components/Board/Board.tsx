@@ -1,4 +1,4 @@
-import {Lightbulb} from 'lucide-preact';
+import {BarChartBig, Dices, HelpCircle, Lightbulb} from 'lucide-preact';
 import {type FunctionComponent} from 'preact';
 import {useState, useEffect} from 'preact/hooks';
 
@@ -35,6 +35,24 @@ const Board: FunctionComponent = () => {
 					// Add random possible solution to messages
 
 					addMessage(possibleSolutions[0].toUpperCase());
+				},
+			},
+			{
+				icon: HelpCircle,
+				onClick() {
+					addMessage('TODO!');
+				},
+			},
+			{
+				icon: BarChartBig,
+				onClick() {
+					addMessage('TODO!');
+				},
+			},
+			{
+				icon: Dices,
+				onClick() {
+					addMessage('TODO!');
 				},
 			},
 		],
