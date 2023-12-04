@@ -1,4 +1,4 @@
-- [ ] Hints for the user
+- [X] Hints for the user
 - [X] Fix word processing bug (jests-shore)
 - [ ] Streak function
 - [ ] Stats for guesses

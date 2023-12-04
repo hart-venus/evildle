@@ -32,7 +32,9 @@ const Board: FunctionComponent = () => {
 			{
 				icon: Lightbulb,
 				onClick() {
-					console.log('Clicked!');
+					// Add random possible solution to messages
+
+					addMessage(possibleSolutions[0].toUpperCase());
 				},
 			},
 		],

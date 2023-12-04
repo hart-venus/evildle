@@ -16,4 +16,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.1s ease-in-out;
+}
+.toolbar-item:hover {
+    background-color: color-mix(in srgb, var(--text-color) 100%, transparent);
+    color: var(--background-color);
+    border: 3px solid var(--text-color);
+    transform: scale(1.2);
 }
