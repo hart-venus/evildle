@@ -4,10 +4,17 @@ import {useState, useEffect} from 'preact/hooks';
 
 import validWords from '../../words.json';
 import BoardRow from '../BoardRow/BoardRow';
+import Keyboard from '../Keyboard/Keyboard';
 import Message, {type MessageProps} from '../Message/Message';
 import './Board.css';
 import ToolBar, {type ToolBarProps} from '../ToolBar/ToolBar';
-import Keyboard from '../Keyboard/Keyboard';
+
+export enum KeyStates { // For strict use in the Keyborard component
+	none = 0,
+	inword = 1,
+	notinword = 2,
+	correct = 3,
+}
 
 const Board: FunctionComponent = () => {
 	const nRows = 6;

@@ -1,27 +1,41 @@
 import {type FunctionComponent} from 'preact';
+import './Keyboard.css';
 
 type KeyboardProps = {
 	letterValues: number[][];
 };
 
 const Keyboard: FunctionComponent<KeyboardProps> = () => {
-	const keyPress = () => {
+	const rows = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
+	const keyPress = (key: string) => {
 		const event = new KeyboardEvent('keydown', {
-			key: 'a',
-			code: 'KeyA',
-			which: 65,
-			shiftKey: false,
-			ctrlKey: false,
-			metaKey: false,
+			key: key.toLowerCase(),
 		});
 		window.dispatchEvent(event);
-		console.log('keyPress');
 	};
 
+	function getKeyClass(key: string) {
+		return 'key';
+	}
+
 	return (
-		<>
-			<button onClick={keyPress}>A</button>
-		</>
+		<div className='keyboard'>
+			{rows.map((row, index) => (
+				<div className='row' key={index}>
+					{row.split('').map(letter => (
+						<div
+							className={getKeyClass(letter)}
+							key={letter}
+							onClick={() => {
+								keyPress(letter);
+							}}
+						>
+							{letter}
+						</div>
+					))}
+				</div>
+			))}
+		</div>
 	);
 };
 
