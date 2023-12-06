@@ -39,6 +39,7 @@ const BoardRow: FunctionComponent<BoardRowProps> = ({
 	}
 
 	const [revealedIndex, setRevealedIndex] = useState<number>(-1);
+	const [winAnimationIndex, setWinAnimationIndex] = useState<number>(-1);
 	useEffect(() => {
 		const increaseRevealIndex = (times: number) => {
 			if (times < 5) {
@@ -52,6 +53,18 @@ const BoardRow: FunctionComponent<BoardRowProps> = ({
 		if (revealResults) {
 			console.log('Game State from BoardRow:', gameState);
 			increaseRevealIndex(0);
+			// If every state is correct, then win animation
+			let win = true;
+			for (let i = 0; i < input.length; i++) {
+				if (classFromState(gameState, input[i], i) !== BoardCellState.correct) {
+					win = false;
+					break;
+				}
+			}
+
+			if (win) {
+				console.log('Win animation');
+			}
 		}
 	}, [revealResults]);
 	return (
